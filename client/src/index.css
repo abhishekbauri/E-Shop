@@ -85,12 +85,3 @@
   align-items: center;
   justify-content: center;
 }
-
-/* ----------------------Register page--------------- */
-.register {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 75vh;
-  flex-direction: column;
-}

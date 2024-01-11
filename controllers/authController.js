@@ -16,6 +16,7 @@ export const registerController = async (req, res) => {
 
     res.status(201).json({
       status: "success",
+      message: "Registered Successfully",
       data: {
         user,
       },

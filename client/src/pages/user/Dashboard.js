@@ -3,7 +3,7 @@ import Layout from "../../components/layout/Layout";
 
 const Dashboard = () => {
   return (
-    <Layout title={"Dashboard-Ecommerce App"}>
+    <Layout title={"Dashboard E-Shop"}>
       <h1>Dashboard</h1>
     </Layout>
   );

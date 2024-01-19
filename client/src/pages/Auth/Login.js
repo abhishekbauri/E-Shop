@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 
@@ -11,6 +11,7 @@ const Login = () => {
   const [auth, setAuth] = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +38,8 @@ const Login = () => {
         // saving details in local storage
         localStorage.setItem("auth", JSON.stringify(res.data));
 
-        navigate("/");
+        // directly checkout to the url after login or if no url than home page
+        navigate(location.state || "/");
       } else if (res.data.status === "fail") {
         toast.error(res.data.message);
       }

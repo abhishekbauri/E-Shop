@@ -3,10 +3,12 @@ import Layout from "../../components/layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [auth, setAuth] = useAuth();
 
   const navigate = useNavigate();
 
@@ -24,6 +26,17 @@ const Login = () => {
       if (res && res.data.status === "success") {
         toast.success(res.data.message);
         // alert(res.data.message);
+
+        // setting authentication details using context api
+        setAuth({
+          ...auth,
+          user: res.data.data,
+          token: res.data.token,
+        });
+
+        // saving details in local storage
+        localStorage.setItem("auth", JSON.stringify(res.data));
+
         navigate("/");
       } else if (res.data.status === "fail") {
         toast.error(res.data.message);

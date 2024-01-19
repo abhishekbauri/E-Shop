@@ -18,7 +18,8 @@ const AuthProvider = ({ children }) => {
         token: parseData.token,
       });
     }
-  }, [auth]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AuthContext.Provider value={[auth, setAuth]}>

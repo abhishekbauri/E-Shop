@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "A user must have a address"],
     },
+    answer: {
+      type: String,
+      required: [true, "Answer is required!"],
+    },
     role: {
       type: Number,
       default: 0,

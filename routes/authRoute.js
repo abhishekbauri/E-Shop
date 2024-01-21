@@ -1,5 +1,6 @@
 import exrpress from "express";
 import {
+  forgotPasswordController,
   loginController,
   registerController,
   testController,
@@ -14,6 +15,9 @@ const router = exrpress.Router();
 
 router.post("/register", registerController);
 router.post("/login", loginController);
+
+// Forgot password
+router.post("/forgot-password", forgotPasswordController);
 
 router.get("/test", requireSignIn, isAdmin, testController);
 

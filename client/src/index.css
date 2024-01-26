@@ -85,3 +85,9 @@
   align-items: center;
   justify-content: center;
 }
+
+/* ------------------------------- Product link -------------------- */
+.product-link {
+  text-decoration: none;
+  color: black !important;
+}

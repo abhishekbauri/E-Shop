@@ -164,3 +164,25 @@ export const updateProductController = async (req, res) => {
     });
   }
 };
+
+// filters
+export const productFiltersController = async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+    let args = {};
+    if (checked.length > 0) args.category = checked;
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    const products = await Product.find(args);
+    res.status(200).send({
+      status: "success",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      status: "fail",
+      message: "Error in filtering product",
+      error,
+    });
+  }
+};

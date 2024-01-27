@@ -179,9 +179,52 @@ export const productFiltersController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(400).send({
       status: "fail",
       message: "Error in filtering product",
+      error,
+    });
+  }
+};
+
+// count prducts
+export const productCountController = async (req, res) => {
+  try {
+    const total = await Product.find().estimatedDocumentCount();
+    res.status(200).send({
+      status: "success",
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      status: "fail",
+      message: "Error in product count",
+      error,
+    });
+  }
+};
+
+// product list based on page
+export const productListController = async (req, res) => {
+  try {
+    const perPage = 4;
+    const page = req.params.page ? req.params.page : 1;
+    const products = await Product.find()
+      .select("-photo")
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .sort({ createdAt: -1 });
+
+    res.status(200).send({
+      status: "success",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      status: "fail",
+      message: "Error in product count",
       error,
     });
   }

@@ -9,6 +9,9 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoadiing] = useState(false);
 
   // Get all categories
   const getAllCategory = async () => {
@@ -25,9 +28,12 @@ const HomePage = () => {
   // get products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      setLoadiing(true);
+      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      setLoadiing(false);
       setProducts(data.products);
     } catch (error) {
+      setLoadiing(false);
       console.log(error);
     }
   };
@@ -55,15 +61,49 @@ const HomePage = () => {
     }
   };
 
+  // getTotal count of products
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/product/product-count");
+      setTotal(data?.total);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // load more
+  const loadMore = async () => {
+    try {
+      setLoadiing(true);
+      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      setLoadiing(false);
+      setProducts([...products, ...data?.products]);
+    } catch (error) {
+      console.log(error);
+      setLoadiing(false);
+    }
+  };
+
+  useEffect(() => {
+    if (page > 1) loadMore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
   useEffect(() => {
     getAllCategory();
+    getTotal();
+  }, []);
+
+  useEffect(() => {
     if (!checked.length && !radio.length) getAllProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked.length, radio.length]);
 
   useEffect(() => {
     if (checked.length || radio.length) filterProduct();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked, radio]);
+
   return (
     <Layout title={"All Products - Best offers"}>
       <div className="container-fluid mt-3 p3">
@@ -126,6 +166,20 @@ const HomePage = () => {
                   </div>
                 </div>
               ))}
+            </div>
+
+            <div className="m-2 p-3">
+              {products && products.length < total && (
+                <button
+                  className="btn btn-warning"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPage(page + 1);
+                  }}
+                >
+                  {loading ? "Loading..." : "Load More"}
+                </button>
+              )}
             </div>
           </div>
         </div>

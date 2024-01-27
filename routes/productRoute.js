@@ -10,6 +10,7 @@ import {
   productFiltersController,
   productListController,
   productPhotoController,
+  searchProductController,
   updateProductController,
 } from "../controllers/productController.js";
 // for storing image
@@ -52,6 +53,9 @@ router.get("/product-count", productCountController);
 
 // product per page
 router.get("/product-list/:page", productListController);
+
+// search product
+router.get("/search/:keyword", searchProductController);
 
 // update product
 router.put(

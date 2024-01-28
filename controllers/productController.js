@@ -254,3 +254,29 @@ export const searchProductController = async (req, res) => {
     });
   }
 };
+
+// similar product
+export const similarProductController = async (req, res) => {
+  try {
+    const { pid, cid } = req.params;
+    const products = await Product.find({
+      category: cid,
+      _id: { $ne: pid },
+    })
+      .select("-photo")
+      .limit(3)
+      .populate("category");
+
+    res.status(200).send({
+      status: "success",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      status: "fail",
+      message: "Error while getting similar products",
+      error,
+    });
+  }
+};

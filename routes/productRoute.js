@@ -11,6 +11,7 @@ import {
   productListController,
   productPhotoController,
   searchProductController,
+  similarProductController,
   updateProductController,
 } from "../controllers/productController.js";
 // for storing image
@@ -56,6 +57,9 @@ router.get("/product-list/:page", productListController);
 
 // search product
 router.get("/search/:keyword", searchProductController);
+
+// similar (recommended) products
+router.get("/similar-product/:pid/:cid", similarProductController);
 
 // update product
 router.put(

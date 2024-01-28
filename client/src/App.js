@@ -20,6 +20,8 @@ import Products from "./pages/Admin/Products";
 import UpdateProduct from "./pages/Admin/UpdateProduct";
 import SearchProduct from "./pages/SearchProduct";
 import ProductDetails from "./pages/ProductDetails";
+import Categories from "./pages/Categories";
+import CategoryProduct from "./pages/CategoryProduct";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<SearchProduct />} />
         <Route path="/product/:slug" element={<ProductDetails />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/category/:slug" element={<CategoryProduct />} />
 
         {/* Protecting routes */}
         <Route path="/dashboard" element={<PrivateRoute />}>

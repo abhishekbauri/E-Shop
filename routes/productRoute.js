@@ -6,6 +6,7 @@ import {
   deleteProductController,
   getProductController,
   getSingleProductController,
+  productCategoryController,
   productCountController,
   productFiltersController,
   productListController,
@@ -60,6 +61,9 @@ router.get("/search/:keyword", searchProductController);
 
 // similar (recommended) products
 router.get("/similar-product/:pid/:cid", similarProductController);
+
+// category wise product
+router.get("/product-category/:slug", productCategoryController);
 
 // update product
 router.put(

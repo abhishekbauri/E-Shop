@@ -1,6 +1,7 @@
 import exrpress from "express";
 import {
   forgotPasswordController,
+  getOrdersController,
   loginController,
   registerController,
   updateProfileController,
@@ -31,5 +32,8 @@ router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
 
 // update profile
 router.put("/profile", requireSignIn, updateProfileController);
+
+// orders
+router.get("/orders", requireSignIn, getOrdersController);
 
 export default router;

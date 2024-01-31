@@ -180,3 +180,45 @@ export const getOrdersController = async (req, res) => {
     });
   }
 };
+
+// all orders
+export const getAllOrdersController = async (req, res) => {
+  try {
+    const orders = await Order.find({})
+      .populate("products", "-photo")
+      .populate("buyer", "name")
+      .sort({ createdAt: -1 });
+
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      status: "fail",
+      message: "Error while getting all orders",
+      error,
+    });
+  }
+};
+
+// order status
+export const orderStatusController = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+
+    const orders = await Order.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true },
+    );
+
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      status: "fail",
+      message: "Error while updating order status",
+      error,
+    });
+  }
+};

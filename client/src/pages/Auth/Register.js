@@ -76,7 +76,6 @@ const Register = () => {
               className="form-control "
               id="exampleInputEmail"
               placeholder="Enter your email"
-              disabled
             />
           </div>
 

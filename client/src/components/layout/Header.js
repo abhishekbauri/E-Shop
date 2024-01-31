@@ -37,7 +37,10 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <div
+            className="collapse navbar-collapse pe-3"
+            id="navbarTogglerDemo01"
+          >
             <Link to="/" className="navbar-brand">
               🛍️ E-Shop
             </Link>
@@ -130,11 +133,16 @@ const Header = () => {
                 </>
               )}
               <li className="nav-item">
-                <Badge count={cart?.length} showZero>
-                  <NavLink to="/cart" className="nav-link">
+                <NavLink to="/cart" className="nav-link">
+                  <Badge
+                    count={cart?.length}
+                    showZero
+                    offset={[10, -5]}
+                    overflowCount={50}
+                  >
                     Cart
-                  </NavLink>
-                </Badge>
+                  </Badge>
+                </NavLink>
               </li>
             </ul>
           </div>

@@ -128,7 +128,36 @@ export const forgotPasswordController = async (req, res) => {
   }
 };
 
-// testController
-export const testController = async (req, res) => {
-  res.send("Protected route");
+// updateProfileController
+export const updateProfileController = async (req, res) => {
+  try {
+    const { name, email, password, address, phone } = req.body;
+    const user = await User.findById(req.user._id);
+
+    // hash new Password if provided
+    const hashedPassword = password ? await hashPassword(password) : undefined;
+    const updateUser = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        name: name || user.name,
+        password: hashedPassword || user.password,
+        phone: phone || user.phone,
+        address: address || user.address,
+      },
+      { new: true },
+    );
+
+    res.status(200).send({
+      status: "success",
+      message: "Profile updated successfully",
+      updateUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      status: "fail",
+      message: "Error while updating profile",
+      error,
+    });
+  }
 };

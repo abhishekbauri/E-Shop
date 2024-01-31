@@ -73,10 +73,10 @@ const Register = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
+              className="form-control "
               id="exampleInputEmail"
               placeholder="Enter your email"
-              required
+              disabled
             />
           </div>
 

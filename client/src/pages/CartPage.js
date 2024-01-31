@@ -2,8 +2,10 @@ import React from "react";
 import Layout from "../components/layout/Layout.js";
 import { useCart } from "../context/cart.js";
 import { useAuth } from "../context/auth.js";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const [auth] = useAuth();
   const [cart, setCart] = useCart();
 
@@ -80,6 +82,39 @@ const CartPage = () => {
             <p>Total | Checkout | Payment</p>
             <hr />
             <h4>Total: ${totalPrice()} </h4>
+            <hr />
+            {auth?.user?.address ? (
+              <>
+                <div className="mb-3">
+                  <h4 className="text-capitalize">current address</h4>
+                  <h5 className="text-capitalize">{auth?.user?.address}</h5>
+                  <button
+                    className="btn btn-outline-warning text-uppercase"
+                    onClick={() => navigate("/dashboard/user/profile")}
+                  >
+                    update address
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="mb-3">
+                {auth?.token ? (
+                  <button
+                    className="btn btn-outline-warning text-uppercase"
+                    onClick={() => navigate("/dashboard/user/profile")}
+                  >
+                    update address
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-outline-warning text-uppercase"
+                    onClick={() => navigate("/login", { state: "/cart" })}
+                  >
+                    please login to checkout
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

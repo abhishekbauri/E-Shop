@@ -2,12 +2,10 @@ import React from "react";
 import Layout from "../components/layout/Layout.js";
 import { useCart } from "../context/cart.js";
 import { useAuth } from "../context/auth.js";
-import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   const [cart, setCart] = useCart();
-  const navigate = useNavigate();
 
   // total price
   const totalPrice = () => {

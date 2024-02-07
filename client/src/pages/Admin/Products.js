@@ -26,11 +26,13 @@ const Products = () => {
     <Layout>
       <div className="container-fluid mt-3 p-3">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 mb-4">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1 className="text-center">All Product List</h1>
+            <h1 className="text-center text-capitalize text-bg-dark text-light pt-2 pb-2">
+              all product list
+            </h1>
             <div className="d-flex justify-content-around flex-wrap">
               {products?.map((p) => (
                 <Link
@@ -45,11 +47,11 @@ const Products = () => {
                       alt={p.name}
                     />
                     <div className="card-body">
-                      <h5 className="card-title">{p.name}</h5>
+                      <h5 className="card-title text-capitalize">{p.name}</h5>
                       <p className="card-text">
                         {p.description.substring(0, 30)}...
                       </p>
-                      <p className="card-text">$ {p.price}</p>
+                      <p className="card-text fw-bold fs-4">$ {p.price}</p>
                     </div>
                   </div>
                 </Link>

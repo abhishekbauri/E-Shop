@@ -119,33 +119,37 @@ const CreateCategory = () => {
     <Layout title={"Dashboard - Create Category"}>
       <div className="container-fluid mt-3 p-3">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 mb-4">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1> Manage Category</h1>
-            <div className="p-3 w-50">
+            <h1 className="text-center text-capitalize text-bg-dark text-light pt-2 pb-2">
+              manage category
+            </h1>
+            <div className="p-3 ">
               <CategoryForm
                 handleSubmit={handleSubmit}
                 value={name}
                 setValue={setName}
               />
             </div>
-            <div className="w-75">
+            <div>
               <table className="table">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" className="text-center">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {category?.map((c) => (
                     <tr key={c._id}>
-                      <td>{c.name}</td>
-                      <td>
+                      <td className="text-capitalize">{c.name}</td>
+                      <td className="text-center">
                         <button
-                          className="btn btn-primary ms-2"
+                          className="btn btn-outline-warning ms-2"
                           onClick={() => {
                             setVisible(true);
                             setUpdatedName(c.name);
@@ -155,7 +159,7 @@ const CreateCategory = () => {
                           Edit
                         </button>
                         <button
-                          className="btn btn-danger ms-2"
+                          className="btn btn-outline-danger ms-2"
                           onClick={() => {
                             handleDelete(c._id);
                           }}

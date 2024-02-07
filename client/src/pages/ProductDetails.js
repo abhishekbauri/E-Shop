@@ -54,32 +54,36 @@ const ProductDetails = () => {
           />
         </div>
         <div className="col-md-6 ">
-          <h1 className="text-center">Product Details</h1>
-          <h4>Name: {product.name}</h4>
+          <h1 className="text-center text-capitalize">product details</h1>
+          <h4 className="text-capitalize">Name: {product.name}</h4>
           <h4>Description: {product.description}</h4>
-          <h4>Price: $ {product.price}</h4>
-          <h4>Category: {product.category?.name}</h4>
+          <h4 className="fw-bold">Price: $ {product.price}</h4>
+          <h4 className="text-capitalize">
+            Category: {product.category?.name}
+          </h4>
           <h4>Quantity Available: {product.quantity}</h4>
           <button
-            className="btn btn-secondary mt-2"
+            className="btn btn-outline-primary text-uppercase mt-3"
             onClick={() => {
               setCart([...cart, product]);
               localStorage.setItem("cart", JSON.stringify([...cart, product]));
               toast.success("Items added to cart");
             }}
           >
-            ADD TO CART
+            add to cart
           </button>
         </div>
       </div>
 
       <hr />
       <div className="row container-fluid">
-        <h5> Similar Products </h5>
+        <h5 className="text-center text-uppercase fs-2"> Similar Products </h5>
         {relatedProducts.length < 1 && (
-          <p className="text-center">No similar products found</p>
+          <p className="text-center text-uppercase">
+            No similar products found
+          </p>
         )}
-        <div className="d-flex justify-content-around flex-wrap">
+        <div className="d-flex justify-content-around pb-4 flex-wrap">
           {relatedProducts?.map((p) => (
             <div className="card mt-3" style={{ width: "18rem" }} key={p._id}>
               <img
@@ -88,26 +92,32 @@ const ProductDetails = () => {
                 alt={p.name}
               />
               <div className="card-body">
-                <h5 className="card-title">{p.name}</h5>
-                <p className="card-text">{p.description.substring(0, 30)}...</p>
-                <p className="card-text">$ {p.price}</p>
+                <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
+                  <h5 className="card-title text-capitalize">{p.name}</h5>
+                  <p className="card-text fw-bold fs-5">$ {p.price}</p>
+                </div>
 
-                <button
-                  className="btn btn-primary ms-1"
-                  onClick={() => navigate(`/product/${p.slug}`)}
-                >
-                  More Details
-                </button>
-                <button
-                  className="btn btn-secondary ms-1"
-                  onClick={() => {
-                    setCart([...cart, p]);
-                    localStorage.setItem("cart", JSON.stringify([...cart, p]));
-                    toast.success("Items added to cart");
-                  }}
-                >
-                  Add To Cart
-                </button>
+                <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
+                  <button
+                    className="btn btn-outline-info text-capitalize"
+                    onClick={() => navigate(`/product/${p.slug}`)}
+                  >
+                    More Details
+                  </button>
+                  <button
+                    className="btn btn-outline-primary text-uppercase "
+                    onClick={() => {
+                      setCart([...cart, p]);
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...cart, p]),
+                      );
+                      toast.success("Items added to cart");
+                    }}
+                  >
+                    Add To Cart
+                  </button>
+                </div>
               </div>
             </div>
           ))}

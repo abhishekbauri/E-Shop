@@ -77,12 +77,14 @@ const CreateProduct = () => {
     <Layout title={"Dashboard - Create Product"}>
       <div className="container-fluid mt-3 p-3">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 mb-4">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1> Create Products</h1>
-            <div className="m-1 w-75">
+            <h1 className="text-center text-capitalize text-bg-dark text-light pt-2 pb-2">
+              create products
+            </h1>
+            <div className="m-1">
               <Select
                 bordered={false}
                 placeholder="Select a category"
@@ -181,8 +183,11 @@ const CreateProduct = () => {
                 </Select>
               </div>
               <div className="mb-3">
-                <button className="btn btn-primary" onClick={handleCreate}>
-                  CREATE PRODUCT
+                <button
+                  className="btn btn-outline-primary text-uppercase"
+                  onClick={handleCreate}
+                >
+                  create product
                 </button>
               </div>
             </div>

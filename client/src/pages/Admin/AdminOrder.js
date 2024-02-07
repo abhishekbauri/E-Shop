@@ -63,27 +63,29 @@ const AdminOrder = () => {
     <Layout title={"All orders data"}>
       <div className="container-fluid">
         <div className="row mt-3">
-          <div className="col-md-3">
+          <div className="col-md-3 mb-4">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1 className="text-center">All Orders</h1>
+            <h1 className="text-center text-capitalize text-bg-dark text-light pt-2 pb-2">
+              all orders
+            </h1>
             {orders?.map((o, i) => {
               return (
-                <div className="border shadow">
+                <div className="border shadow mb-2">
                   <table className="table">
                     <thead>
-                      <tr>
+                      <tr className="text-center">
                         <th scope="col">#</th>
                         <th scope="col">Status</th>
                         <th scope="col">Buyer</th>
-                        <th scope="col"> Date</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Payment</th>
                         <th scope="col">Quantity</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr className="text-center">
                         <td>{i + 1}</td>
                         <td>
                           <Select

@@ -132,11 +132,14 @@ const UpdateProduct = () => {
     <Layout title={"Dashboard - Create Product"}>
       <div className="container-fluid mt-3 p-3">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 mb-4">
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1> Update Products</h1>
+            <h1 className="text-center text-capitalize text-bg-dark text-light pt-2 pb-2">
+              {" "}
+              update products
+            </h1>
             <div className="m-1 w-75">
               <Select
                 bordered={false}
@@ -247,13 +250,19 @@ const UpdateProduct = () => {
                 </Select>
               </div>
               <div className="mb-3">
-                <button className="btn btn-primary" onClick={handleUpdate}>
-                  UDATE PRODUCT
+                <button
+                  className="btn btn-outline-primary text-uppercase"
+                  onClick={handleUpdate}
+                >
+                  update prouct
                 </button>
               </div>
               <div className="mb-3">
-                <button className="btn btn-danger" onClick={deleteUpdate}>
-                  DELETE PRODUCT
+                <button
+                  className="btn btn-outline-danger text-uppercase"
+                  onClick={deleteUpdate}
+                >
+                  delete product
                 </button>
               </div>
             </div>

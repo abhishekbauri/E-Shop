@@ -91,3 +91,10 @@
   text-decoration: none;
   color: black !important;
 }
+
+/* ------------------------------- Card Image -------------------- */
+.card-img-top {
+  width: 18rem;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}

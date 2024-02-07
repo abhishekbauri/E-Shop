@@ -113,41 +113,48 @@ const HomePage = () => {
     <Layout title={"All Products - Best offers"}>
       <div className="container-fluid mt-3 p3">
         <div className="row">
-          <div className="col-md-2">
-            <h4 className="text-center">Filter By Category</h4>
+          <div className="col-md-2 mb-3 shadow border-end">
+            <h4 className="text-center mt-2 text-uppercase fs-5">
+              Filter By Category
+            </h4>
             <div className="d-flex flex-column">
               {categories?.map((c) => (
                 <Checkbox
                   key={c._id}
                   onChange={(e) => handleFilter(e.target.checked, c._id)}
+                  className="text-uppercase"
                 >
                   {c.name}
                 </Checkbox>
               ))}
             </div>
 
-            <h4 className="text-center mt-4">Filter By Price</h4>
+            <h4 className="text-center mt-4 text-uppercase fs-5">
+              Filter By Price
+            </h4>
             <div className="d-flex flex-column">
               <Radio.Group onChange={(e) => setRadio(e.target.value)}>
                 {Prices?.map((p) => (
                   <div key={p._id}>
-                    <Radio value={p.array}>{p.name}</Radio>
+                    <Radio value={p.array} className="text-uppercase">
+                      {p.name}
+                    </Radio>
                   </div>
                 ))}
               </Radio.Group>
             </div>
 
-            <div className="d-flex flex-column mt-3">
+            <div className="d-flex flex-column mt-3 mb-3">
               <button
-                className="btn btn-danger"
+                className="btn btn-danger text-uppercase"
                 onClick={() => window.location.reload()}
               >
-                RESET FILTERS
+                reset filters
               </button>
             </div>
           </div>
           <div className="col-md-10">
-            <h1 className="text-center">All Products</h1>
+            <h1 className="text-center text-uppercase">All Products</h1>
             <div className="d-flex justify-content-around flex-wrap">
               {products?.map((p) => (
                 <div
@@ -161,30 +168,31 @@ const HomePage = () => {
                     alt={p.name}
                   />
                   <div className="card-body">
-                    <h5 className="card-title">{p.name}</h5>
-                    <p className="card-text">
-                      {p.description.substring(0, 30)}...
-                    </p>
-                    <p className="card-text">$ {p.price}</p>
-                    <button
-                      className="btn btn-primary ms-1"
-                      onClick={() => navigate(`/product/${p.slug}`)}
-                    >
-                      More Details
-                    </button>
-                    <button
-                      className="btn btn-secondary ms-1"
-                      onClick={() => {
-                        setCart([...cart, p]);
-                        localStorage.setItem(
-                          "cart",
-                          JSON.stringify([...cart, p]),
-                        );
-                        toast.success("Items added to cart");
-                      }}
-                    >
-                      Add To Cart
-                    </button>
+                    <div className=" d-flex justify-content-between align-items-center pt-2 pb-2">
+                      <h5 className="card-title text-capitalize">{p.name}</h5>
+                      <p className="card-text fw-bold fs-5">$ {p.price}</p>
+                    </div>
+                    <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
+                      <button
+                        className="btn btn-outline-info text-capitalize"
+                        onClick={() => navigate(`/product/${p.slug}`)}
+                      >
+                        More Details
+                      </button>
+                      <button
+                        className="btn btn-outline-primary text-uppercase "
+                        onClick={() => {
+                          setCart([...cart, p]);
+                          localStorage.setItem(
+                            "cart",
+                            JSON.stringify([...cart, p]),
+                          );
+                          toast.success("Items added to cart");
+                        }}
+                      >
+                        Add To Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}

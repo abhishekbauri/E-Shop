@@ -51,7 +51,7 @@ const Products = () => {
                       <p className="card-text">
                         {p.description.substring(0, 30)}...
                       </p>
-                      <p className="card-text fw-bold fs-4">$ {p.price}</p>
+                      <p className="card-text fw-bold fs-4">₹ {p.price}</p>
                     </div>
                   </div>
                 </Link>

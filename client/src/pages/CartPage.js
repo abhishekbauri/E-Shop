@@ -112,11 +112,10 @@ const CartPage = () => {
                   />
                 </div>
                 <div className="col-md-8">
-                  <p>{p.name}</p>
-                  <p>{p.description.substring(0, 30)}</p>
-                  <p>Price: $ {p.price}</p>
+                  <p className="text-capitalize">{p.name}</p>
+                  <p className="fw-bold">Price: ₹ {p.price}</p>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-outline-danger"
                     onClick={() => removeCartItem(p._id)}
                   >
                     Remove
@@ -129,7 +128,7 @@ const CartPage = () => {
             <h4> Cart Summary</h4>
             <p>Total | Checkout | Payment</p>
             <hr />
-            <h4>Total: ${totalPrice()} </h4>
+            <h4>Total: ₹ {totalPrice()} </h4>
             <hr />
             {auth?.user?.address ? (
               <>

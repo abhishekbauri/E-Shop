@@ -30,7 +30,7 @@ const SearchProduct = () => {
                 <div className="card-body">
                   <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
                     <h5 className="card-title text-capitalize">{p.name}</h5>
-                    <p className="card-text fw-bold fs-5">$ {p.price}</p>
+                    <p className="card-text fw-bold fs-5">₹ {p.price}</p>
                   </div>
 
                   <div className="d-flex justify-content-between align-items-center pt-2 pb-2">

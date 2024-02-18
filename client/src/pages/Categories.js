@@ -8,14 +8,18 @@ const Categories = () => {
   return (
     <Layout title={"All Categories"}>
       <div className="container-fluid">
-        <div className="row">
-          {categories.map((c) => (
-            <div className="col-md-6 mt-5 mb-5 gx-3 gy-3" key={c._id}>
-              <Link to={`/category/${c.slug}`} className="btn btn-primary">
+        <div className="row mt-5">
+          <div className=" d-flex justify-content-center flex-wrap gap-3">
+            {categories.map((c) => (
+              <Link
+                to={`/category/${c.slug}`}
+                className="btn btn-outline-primary text-capitalize"
+                key={c._id}
+              >
                 {c.name}
               </Link>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </Layout>

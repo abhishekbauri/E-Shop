@@ -98,3 +98,10 @@
   aspect-ratio: 1/1;
   object-fit: contain;
 }
+
+/* -------------------input field---------------------------------- */
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid black;
+}

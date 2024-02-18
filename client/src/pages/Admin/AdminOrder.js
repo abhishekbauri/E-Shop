@@ -72,7 +72,7 @@ const AdminOrder = () => {
             </h1>
             {orders?.map((o, i) => {
               return (
-                <div className="border shadow mb-2">
+                <div className="border w-100 shadow mb-2">
                   <table className="table">
                     <thead>
                       <tr className="text-center">
@@ -101,11 +101,13 @@ const AdminOrder = () => {
                             ))}
                           </Select>
                         </td>
-                        <td>{o?.buyer?.name}</td>
+                        <td className="fw-bold">{o?.buyer?.name}</td>
                         <td className="text-capitalize">
                           {moment(o?.createdAt).fromNow()}
                         </td>
-                        <td>{o?.payment.success ? "Success" : "Failed"}</td>
+                        <td className="fw-bold">
+                          {o?.payment.success ? "Success" : "Failed"}
+                        </td>
                         <td>{o?.products?.length}</td>
                       </tr>
                     </tbody>
@@ -123,7 +125,7 @@ const AdminOrder = () => {
                         </div>
                         <div className="col-md-8">
                           <p>{p.name}</p>
-                          <p>Price : {p.price}</p>
+                          <p className="fw-bold">Price : {p.price}</p>
                         </div>
                       </div>
                     ))}

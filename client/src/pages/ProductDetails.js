@@ -57,7 +57,7 @@ const ProductDetails = () => {
           <h1 className="text-center text-capitalize">product details</h1>
           <h4 className="text-capitalize">Name: {product.name}</h4>
           <h4>Description: {product.description}</h4>
-          <h4 className="fw-bold">Price: $ {product.price}</h4>
+          <h4 className="fw-bold">Price: ₹ {product.price}</h4>
           <h4 className="text-capitalize">
             Category: {product.category?.name}
           </h4>
@@ -94,7 +94,7 @@ const ProductDetails = () => {
               <div className="card-body">
                 <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
                   <h5 className="card-title text-capitalize">{p.name}</h5>
-                  <p className="card-text fw-bold fs-5">$ {p.price}</p>
+                  <p className="card-text fw-bold fs-5">₹ {p.price}</p>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center pt-2 pb-2">

@@ -31,7 +31,9 @@ const CategoryProduct = () => {
   return (
     <Layout>
       <div className="container-fluid">
-        <h1 className="text-center text-capitalize mt-2"> {category?.name} </h1>
+        <h1 className="text-center text-capitalize mt-2 fst-italic">
+          {category?.name}
+        </h1>
 
         <div className="row">
           <div className="d-flex justify-content-around flex-wrap">

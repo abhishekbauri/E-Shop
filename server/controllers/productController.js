@@ -58,7 +58,6 @@ export const getProductController = async (req, res) => {
     const products = await Product.find()
       .select("-photo")
       .populate("category")
-      .limit(12)
       .sort({ createdAt: -1 });
 
     res.status(201).send({
@@ -279,7 +278,7 @@ export const similarProductController = async (req, res) => {
       _id: { $ne: pid },
     })
       .select("-photo")
-      .limit(3)
+      .limit(4)
       .populate("category");
 
     res.status(200).send({

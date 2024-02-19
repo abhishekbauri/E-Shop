@@ -11,6 +11,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [cart, setCart] = useCart();
+  const [loading, setLoading] = useState(true);
 
   // get similar product
   const getSimilarProduct = async (pid, cid) => {
@@ -27,11 +28,13 @@ const ProductDetails = () => {
   // get products
   const getProduct = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         `/api/v1/product/get-product/${params.slug}`,
       );
       setProduct(data?.products);
       getSimilarProduct(data?.products._id, data?.products?.category._id);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -44,46 +47,53 @@ const ProductDetails = () => {
 
   return (
     <Layout>
-      <div className="row container-fluid mt-3">
-        <div className="col-md-6 text-center d-flex justify-content-center align-items-center">
-          <img
-            src={`/api/v1/product/product-photo/${product._id}`}
-            alt={product.name}
-            height="300"
-            width={"300px"}
-          />
+      {loading ? (
+        <h1 className="text-center">Loading...</h1>
+      ) : (
+        <div className="row container-fluid mt-3">
+          <div className="col-md-6 text-center d-flex justify-content-center align-items-center">
+            <img
+              src={`/api/v1/product/product-photo/${product._id}`}
+              alt={product.name}
+              height="300"
+              width={"300px"}
+            />
+          </div>
+          <div className="col-md-6 ">
+            <h1 className="text-center text-capitalize fst-italic">
+              product details
+            </h1>
+            <h4 className="text-capitalize fw-light">
+              Name: <span className=" fw-bold"> {product.name} </span>
+            </h4>
+            <h4 className=" fw-light">Description: {product.description}</h4>
+            <h4 className="fw-light">
+              Price: <span className=" fw-bold"> ₹ {product.price} </span>
+            </h4>
+            <h4 className="text-capitalize fw-light">
+              Category:
+              <span className=" fw-bold"> {product.category?.name} </span>
+            </h4>
+            <h4 className="fw-light">
+              Quantity Available:
+              <span className=" fw-bold"> {product.quantity} </span>
+            </h4>
+            <button
+              className="btn btn-outline-primary text-uppercase mt-3"
+              onClick={() => {
+                setCart([...cart, product]);
+                localStorage.setItem(
+                  "cart",
+                  JSON.stringify([...cart, product]),
+                );
+                toast.success("Items added to cart");
+              }}
+            >
+              add to cart
+            </button>
+          </div>
         </div>
-        <div className="col-md-6 ">
-          <h1 className="text-center text-capitalize fst-italic">
-            product details
-          </h1>
-          <h4 className="text-capitalize fw-light">
-            Name: <span className=" fw-bold"> {product.name} </span>
-          </h4>
-          <h4 className=" fw-light">Description: {product.description}</h4>
-          <h4 className="fw-light">
-            Price: <span className=" fw-bold"> ₹ {product.price} </span>
-          </h4>
-          <h4 className="text-capitalize fw-light">
-            Category:{" "}
-            <span className=" fw-bold"> {product.category?.name} </span>
-          </h4>
-          <h4 className="fw-light">
-            Quantity Available:{" "}
-            <span className=" fw-bold"> {product.quantity} </span>
-          </h4>
-          <button
-            className="btn btn-outline-primary text-uppercase mt-3"
-            onClick={() => {
-              setCart([...cart, product]);
-              localStorage.setItem("cart", JSON.stringify([...cart, product]));
-              toast.success("Items added to cart");
-            }}
-          >
-            add to cart
-          </button>
-        </div>
-      </div>
+      )}
 
       <hr />
       <div className="row container-fluid">

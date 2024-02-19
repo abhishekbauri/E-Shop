@@ -52,7 +52,7 @@ const CategoryProduct = () => {
                   <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
                     <button
                       className="btn btn-outline-info text-capitalize"
-                      onClick={() => navigate(`/product/${p.slug}`)}
+                      onClick={() => navigate(`/product/${p?.slug}`)}
                     >
                       More Details
                     </button>

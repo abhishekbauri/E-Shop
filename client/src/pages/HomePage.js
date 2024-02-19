@@ -154,7 +154,9 @@ const HomePage = () => {
             </div>
           </div>
           <div className="col-md-10">
-            <h1 className="text-center text-uppercase">All Products</h1>
+            <h1 className="text-center text-uppercase fst-italic">
+              All Products
+            </h1>
             <div className="d-flex justify-content-around flex-wrap">
               {products?.map((p) => (
                 <div
@@ -169,8 +171,10 @@ const HomePage = () => {
                   />
                   <div className="card-body">
                     <div className=" d-flex justify-content-between align-items-center pt-2 pb-2">
-                      <h5 className="card-title text-capitalize">{p.name}</h5>
-                      <p className="card-text fw-bold fs-5">₹ {p.price}</p>
+                      <h5 className="card-title text-capitalize m-0 fw-light">
+                        {p.name}
+                      </h5>
+                      <p className="card-text fw-bold fs-6 m-0">₹ {p.price}</p>
                     </div>
                     <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
                       <button

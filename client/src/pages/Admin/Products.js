@@ -49,7 +49,7 @@ const Products = () => {
                     <div className="card-body">
                       <h5 className="card-title text-capitalize">{p.name}</h5>
                       <p className="card-text">
-                        {p.description.substring(0, 30)}...
+                        {p.description.substring(0, 50)}...
                       </p>
                       <p className="card-text fw-bold fs-4">₹ {p.price}</p>
                     </div>

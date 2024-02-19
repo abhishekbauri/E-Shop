@@ -45,7 +45,7 @@ const ProductDetails = () => {
   return (
     <Layout>
       <div className="row container-fluid mt-3">
-        <div className="col-md-6 text-center">
+        <div className="col-md-6 text-center d-flex justify-content-center align-items-center">
           <img
             src={`/api/v1/product/product-photo/${product._id}`}
             alt={product.name}
@@ -54,14 +54,24 @@ const ProductDetails = () => {
           />
         </div>
         <div className="col-md-6 ">
-          <h1 className="text-center text-capitalize">product details</h1>
-          <h4 className="text-capitalize">Name: {product.name}</h4>
-          <h4>Description: {product.description}</h4>
-          <h4 className="fw-bold">Price: ₹ {product.price}</h4>
-          <h4 className="text-capitalize">
-            Category: {product.category?.name}
+          <h1 className="text-center text-capitalize fst-italic">
+            product details
+          </h1>
+          <h4 className="text-capitalize fw-light">
+            Name: <span className=" fw-bold"> {product.name} </span>
           </h4>
-          <h4>Quantity Available: {product.quantity}</h4>
+          <h4 className=" fw-light">Description: {product.description}</h4>
+          <h4 className="fw-light">
+            Price: <span className=" fw-bold"> ₹ {product.price} </span>
+          </h4>
+          <h4 className="text-capitalize fw-light">
+            Category:{" "}
+            <span className=" fw-bold"> {product.category?.name} </span>
+          </h4>
+          <h4 className="fw-light">
+            Quantity Available:{" "}
+            <span className=" fw-bold"> {product.quantity} </span>
+          </h4>
           <button
             className="btn btn-outline-primary text-uppercase mt-3"
             onClick={() => {
@@ -77,7 +87,9 @@ const ProductDetails = () => {
 
       <hr />
       <div className="row container-fluid">
-        <h5 className="text-center text-uppercase fs-2"> Similar Products </h5>
+        <h5 className="text-center text-uppercase fs-2 fst-italic">
+          Similar Products
+        </h5>
         {relatedProducts.length < 1 && (
           <p className="text-center text-uppercase">
             No similar products found
@@ -93,8 +105,10 @@ const ProductDetails = () => {
               />
               <div className="card-body">
                 <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
-                  <h5 className="card-title text-capitalize">{p.name}</h5>
-                  <p className="card-text fw-bold fs-5">₹ {p.price}</p>
+                  <h5 className="card-title text-capitalize fw-light m-0">
+                    {p.name}
+                  </h5>
+                  <p className="card-text fw-bold fs-6 m-0">₹ {p.price}</p>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center pt-2 pb-2">

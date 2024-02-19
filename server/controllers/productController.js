@@ -186,7 +186,7 @@ export const productFiltersController = async (req, res) => {
     let args = {};
     if (checked.length > 0) args.category = checked;
     if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
-    const products = await Product.find(args);
+    const products = await Product.find(args).select("-photo");
     res.status(200).send({
       status: "success",
       products,
@@ -299,7 +299,9 @@ export const similarProductController = async (req, res) => {
 export const productCategoryController = async (req, res) => {
   try {
     const category = await Category.findOne({ slug: req.params.slug });
-    const products = await Product.find({ category }).populate("category");
+    const products = await Product.find({ category })
+      .select("-photo")
+      .populate("category");
 
     res.status(200).send({
       status: "success",

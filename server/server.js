@@ -19,7 +19,10 @@ const app = express();
 // middleware
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"));
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 // routes
 app.use("/api/v1/auth", authRoutes);
@@ -39,6 +42,6 @@ const PORT = process.env.PORT;
 // listen server
 app.listen(PORT, () => {
   console.log(
-    `Server running on ${process.env.MODE} mode on PORT: ${PORT}`.bgBlue,
+    `Server running on ${process.env.NODE_ENV} mode on PORT: ${PORT}`.bgBlue,
   );
 });

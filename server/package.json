@@ -6,9 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "backend": "nodemon server.js",
-    "frontend": "npm start --prefix ../client",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+    "start:dev": "nodemon server.js",
+    "start:prod": "SET NODE_ENV=production & nodemon server.js"
   },
   "keywords": [],
   "author": "Abhishek Bauri",
@@ -16,7 +15,6 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "braintree": "^3.21.0",
-    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

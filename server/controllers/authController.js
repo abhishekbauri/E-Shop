@@ -24,7 +24,6 @@ export const registerController = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error in Registration",
@@ -84,7 +83,6 @@ export const loginController = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error in login",
@@ -120,7 +118,6 @@ export const forgotPasswordController = async (req, res) => {
       message: "password reset successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Something went wrong",
@@ -154,7 +151,6 @@ export const updateProfileController = async (req, res) => {
       updateUser,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error while updating profile",
@@ -172,7 +168,6 @@ export const getOrdersController = async (req, res) => {
 
     res.json(orders);
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error while getting orders",
@@ -191,7 +186,6 @@ export const getAllOrdersController = async (req, res) => {
 
     res.json(orders);
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error while getting all orders",
@@ -214,7 +208,6 @@ export const orderStatusController = async (req, res) => {
 
     res.json(orders);
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error while updating order status",

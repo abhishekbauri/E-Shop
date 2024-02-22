@@ -5,6 +5,7 @@ import axios from "axios";
 import { useAuth } from "../../context/auth";
 import moment from "moment";
 import Loader from "../../components/loader/Loader";
+import toast from "react-hot-toast";
 
 const Orders = () => {
   const [auth] = useAuth();
@@ -22,7 +23,7 @@ const Orders = () => {
       setOrders(data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   };
 

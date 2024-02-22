@@ -24,7 +24,7 @@ const CategoryProduct = () => {
       setCategory(data?.category);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "An error occurred!");
     }
   };
 

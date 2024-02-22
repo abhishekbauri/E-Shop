@@ -62,7 +62,6 @@ const CreateCategory = () => {
         setCategory(data?.category);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong in getting category");
     }
   };

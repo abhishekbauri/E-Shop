@@ -17,7 +17,15 @@ connectDB();
 const app = express();
 
 // middleware
-app.use(cors());
+const corsOptions = {
+  origin: "https://your-vercel-frontend.vercel.app",
+};
+
+app.use(cors(corsOptions));
+
+// for development
+// app.use(cors());
+
 app.use(express.json());
 
 if (process.env.NODE_ENV === "development") {

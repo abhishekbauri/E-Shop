@@ -22,7 +22,7 @@ const CartPage = () => {
       cart?.map((item) => (total = total + item.price));
       return total;
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong!");
     }
   };
 
@@ -35,7 +35,7 @@ const CartPage = () => {
       setCart(myCart);
       localStorage.setItem("cart", JSON.stringify(myCart));
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong!");
     }
   };
 
@@ -45,7 +45,9 @@ const CartPage = () => {
       const { data } = await axios.get("/api/v1/product/braintree/token");
       setClientToken(data?.clientToken);
     } catch (error) {
-      console.log(error);
+      toast.error(
+        error.response?.data?.msg || error.message || "Server Error!",
+      );
     }
   };
 

@@ -28,7 +28,7 @@ const HomePage = () => {
         setCategories(data?.category);
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Can not fetch category!");
     }
   };
 
@@ -41,7 +41,7 @@ const HomePage = () => {
       setProducts(data.products);
     } catch (error) {
       setLoader(false);
-      console.log(error);
+      toast.error("Error occured while loading product list!");
     }
   };
 
@@ -66,7 +66,7 @@ const HomePage = () => {
       setLoader(false);
       setProducts(data.products);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   };
 
@@ -76,7 +76,7 @@ const HomePage = () => {
       const { data } = await axios.get("/api/v1/product/product-count");
       setTotal(data?.total);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   };
 
@@ -88,8 +88,8 @@ const HomePage = () => {
       setLoading(false);
       setProducts([...products, ...data?.products]);
     } catch (error) {
-      console.log(error);
       setLoading(false);
+      toast.error(error.message || "Error in loading product list.");
     }
   };
 

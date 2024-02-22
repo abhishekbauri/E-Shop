@@ -2,6 +2,7 @@ import React from "react";
 import { useSearch } from "../../context/Search";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const SearchInput = () => {
   const [values, setValues] = useSearch();
@@ -16,7 +17,7 @@ const SearchInput = () => {
       setValues({ ...values, results: data?.result, keyword: "" });
       navigate("/search");
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Oops items not found!");
     }
   };
   return (

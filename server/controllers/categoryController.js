@@ -22,7 +22,6 @@ export const createCategoryController = async (req, res) => {
       category,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error in category",
@@ -51,7 +50,6 @@ export const updateCategoryController = async (req, res) => {
       category,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error in updating category",
@@ -71,7 +69,6 @@ export const getAllCategoryController = async (req, res) => {
       category,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Can not get all category",
@@ -91,7 +88,6 @@ export const singleCategoryController = async (req, res) => {
       category,
     });
   } catch (error) {
-    console.log(error);
     res.status(404).send({
       status: "fail",
       message: "Can not find required category",
@@ -111,7 +107,6 @@ export const deleteCategoryController = async (req, res) => {
       message: "Category deleted successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Can not delete category",

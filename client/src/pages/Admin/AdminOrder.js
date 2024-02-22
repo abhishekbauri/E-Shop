@@ -34,7 +34,7 @@ const AdminOrder = () => {
       setOrders(data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   };
 
@@ -59,7 +59,7 @@ const AdminOrder = () => {
       getOrders();
       toast.success("Status updated successfully");
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   };
 

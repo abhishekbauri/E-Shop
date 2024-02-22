@@ -25,7 +25,7 @@ const ProductDetails = () => {
       setRelatedProducts(data?.products);
       setLoader(false);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   };
 
@@ -40,7 +40,7 @@ const ProductDetails = () => {
       getSimilarProduct(data?.products._id, data?.products?.category._id);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   };
 

@@ -42,7 +42,6 @@ export const createPrdouctController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error in creating product",
@@ -67,7 +66,6 @@ export const getProductController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error in getting all product",
@@ -89,7 +87,6 @@ export const getSingleProductController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "product not found",
@@ -108,7 +105,6 @@ export const productPhotoController = async (req, res) => {
       return res.status(200).send(product.photo.data);
     }
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error while getting product photo",
@@ -128,7 +124,6 @@ export const deleteProductController = async (req, res) => {
       message: "Product deleted successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error while deleting product",
@@ -170,7 +165,6 @@ export const updateProductController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       status: "fail",
       message: "Error in updating product",
@@ -192,7 +186,6 @@ export const productFiltersController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).send({
       status: "fail",
       message: "Error in filtering product",
@@ -210,7 +203,6 @@ export const productCountController = async (req, res) => {
       total,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).send({
       status: "fail",
       message: "Error in product count",
@@ -235,7 +227,6 @@ export const productListController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).send({
       status: "fail",
       message: "Error in product count",
@@ -260,7 +251,6 @@ export const searchProductController = async (req, res) => {
       result,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).send({
       status: "fail",
       message: "Error in  Search Product API",
@@ -286,7 +276,6 @@ export const similarProductController = async (req, res) => {
       products,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).send({
       status: "fail",
       message: "Error while getting similar products",
@@ -310,7 +299,6 @@ export const productCategoryController = async (req, res) => {
       category,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).send({
       status: "fail",
       message: "Error while getting products",

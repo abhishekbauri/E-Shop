@@ -14,12 +14,16 @@ const Dashboard = () => {
           </div>
           <div className="col-md-9 ">
             <div className="card p-3">
-              <h3 className=" text-capitalize">
-                User Name: {auth?.user?.name}
+              <h3 className=" text-capitalize fw-light">
+                User Name: <span className="fw-bold"> {auth?.user?.name}</span>
               </h3>
-              <h3>User Email: {auth?.user?.email}</h3>
-              <h3 className=" text-capitalize">
-                User Address: {auth?.user?.address}
+              <h3 className="fw-light">
+                User Email:
+                <span className="fw-bold"> {auth?.user?.email}</span>
+              </h3>
+              <h3 className="text-capitalize fw-light">
+                User Address:
+                <span className="fw-bold"> {auth?.user?.address}</span>
               </h3>
             </div>
           </div>

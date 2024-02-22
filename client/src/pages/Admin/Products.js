@@ -4,17 +4,20 @@ import Layout from "../../components/layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // get all products
   const getAllProducts = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get("/api/v1/product/get-product");
       setProducts(data.products);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong");
     }
   };
@@ -34,28 +37,36 @@ const Products = () => {
               all product list
             </h1>
             <div className="d-flex justify-content-around flex-wrap">
-              {products?.map((p) => (
-                <Link
-                  key={p._id}
-                  to={`/dashboard/admin/product/${p.slug}`}
-                  className="product-link"
-                >
-                  <div className="card mt-3" style={{ width: "18rem" }}>
-                    <img
-                      src={`/api/v1/product/product-photo/${p._id}`}
-                      className="card-img-top"
-                      alt={p.name}
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title text-capitalize">{p.name}</h5>
-                      <p className="card-text">
-                        {p.description.substring(0, 50)}...
-                      </p>
-                      <p className="card-text fw-bold fs-4">₹ {p.price}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  {products?.map((p) => (
+                    <Link
+                      key={p._id}
+                      to={`/dashboard/admin/product/${p.slug}`}
+                      className="product-link"
+                    >
+                      <div className="card mt-3" style={{ width: "18rem" }}>
+                        <img
+                          src={`/api/v1/product/product-photo/${p._id}`}
+                          className="card-img-top"
+                          alt={p.name}
+                        />
+                        <div className="card-body">
+                          <h5 className="card-title text-capitalize">
+                            {p.name}
+                          </h5>
+                          <p className="card-text">
+                            {p.description.substring(0, 50)}...
+                          </p>
+                          <p className="card-text fw-bold fs-4">₹ {p.price}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>

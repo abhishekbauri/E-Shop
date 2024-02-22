@@ -6,6 +6,7 @@ import { Prices } from "../components/Prices";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
+import Loader from "../components/loader/Loader";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ const HomePage = () => {
   const [radio, setRadio] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [loading, setLoadiing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   // Get all categories
   const getAllCategory = async () => {
@@ -33,12 +35,12 @@ const HomePage = () => {
   // get products
   const getAllProducts = async () => {
     try {
-      setLoadiing(true);
+      setLoader(true);
       const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
-      setLoadiing(false);
+      setLoader(false);
       setProducts(data.products);
     } catch (error) {
-      setLoadiing(false);
+      setLoader(false);
       console.log(error);
     }
   };
@@ -56,10 +58,12 @@ const HomePage = () => {
   // get filter products
   const filterProduct = async () => {
     try {
+      setLoader(true);
       const { data } = await axios.post(`/api/v1/product/product-filters`, {
         checked,
         radio,
       });
+      setLoader(false);
       setProducts(data.products);
     } catch (error) {
       console.log(error);
@@ -79,13 +83,13 @@ const HomePage = () => {
   // load more
   const loadMore = async () => {
     try {
-      setLoadiing(true);
+      setLoading(true);
       const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
-      setLoadiing(false);
+      setLoading(false);
       setProducts([...products, ...data?.products]);
     } catch (error) {
       console.log(error);
-      setLoadiing(false);
+      setLoading(false);
     }
   };
 
@@ -157,50 +161,56 @@ const HomePage = () => {
             <h1 className="text-center text-uppercase fst-italic">
               All Products
             </h1>
-            <div className="d-flex justify-content-around flex-wrap">
-              {products?.map((p) => (
-                <div
-                  className="card mt-3"
-                  style={{ width: "18rem" }}
-                  key={p._id}
-                >
-                  <img
-                    src={`/api/v1/product/product-photo/${p._id}`}
-                    className="card-img-top"
-                    alt={p.name}
-                  />
-                  <div className="card-body">
-                    <div className=" d-flex justify-content-between align-items-center pt-2 pb-2">
-                      <h5 className="card-title text-capitalize m-0 fw-light">
-                        {p.name}
-                      </h5>
-                      <p className="card-text fw-bold fs-6 m-0">₹ {p.price}</p>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
-                      <button
-                        className="btn btn-outline-info text-capitalize"
-                        onClick={() => navigate(`/product/${p?.slug}`)}
-                      >
-                        More Details
-                      </button>
-                      <button
-                        className="btn btn-outline-primary text-uppercase "
-                        onClick={() => {
-                          setCart([...cart, p]);
-                          localStorage.setItem(
-                            "cart",
-                            JSON.stringify([...cart, p]),
-                          );
-                          toast.success("Items added to cart");
-                        }}
-                      >
-                        Add To Cart
-                      </button>
+            {loader ? (
+              <Loader />
+            ) : (
+              <div className="d-flex justify-content-around flex-wrap">
+                {products?.map((p) => (
+                  <div
+                    className="card mt-3"
+                    style={{ width: "18rem" }}
+                    key={p._id}
+                  >
+                    <img
+                      src={`/api/v1/product/product-photo/${p._id}`}
+                      className="card-img-top"
+                      alt={p.name}
+                    />
+                    <div className="card-body">
+                      <div className=" d-flex justify-content-between align-items-center pt-2 pb-2">
+                        <h5 className="card-title text-capitalize m-0 fw-light">
+                          {p.name}
+                        </h5>
+                        <p className="card-text fw-bold fs-6 m-0">
+                          ₹ {p.price}
+                        </p>
+                      </div>
+                      <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
+                        <button
+                          className="btn btn-outline-info text-capitalize"
+                          onClick={() => navigate(`/product/${p?.slug}`)}
+                        >
+                          More Details
+                        </button>
+                        <button
+                          className="btn btn-outline-primary text-uppercase "
+                          onClick={() => {
+                            setCart([...cart, p]);
+                            localStorage.setItem(
+                              "cart",
+                              JSON.stringify([...cart, p]),
+                            );
+                            toast.success("Items added to cart");
+                          }}
+                        >
+                          Add To Cart
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
             <div className="m-2 p-3">
               {products && products.length < total && (

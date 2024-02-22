@@ -6,10 +6,12 @@ import axios from "axios";
 import CategoryForm from "../../components/Form/CategoryForm";
 import { useAuth } from "../../context/auth";
 import { Modal } from "antd";
+import Loader from "../../components/loader/Loader";
 
 const CreateCategory = () => {
   const [category, setCategory] = useState([]);
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
   const [auth] = useAuth();
 
   // for modal
@@ -25,6 +27,7 @@ const CreateCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const { data } = await axios.post(
         "/api/v1/category/create-category",
         {
@@ -37,6 +40,9 @@ const CreateCategory = () => {
         },
       );
 
+      setName("");
+      setLoading(false);
+
       if (data?.status === "success") {
         toast.success(`${name} is created`);
         getAllCategory();
@@ -44,7 +50,6 @@ const CreateCategory = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong on input form");
     }
   };
@@ -53,7 +58,6 @@ const CreateCategory = () => {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/categories");
-      // console.log("data --->", data);
       if (data?.status === "success") {
         setCategory(data?.category);
       }
@@ -126,52 +130,59 @@ const CreateCategory = () => {
             <h1 className="text-center text-capitalize text-bg-dark text-light pt-2 pb-2">
               manage category
             </h1>
-            <div className="p-3 ">
-              <CategoryForm
-                handleSubmit={handleSubmit}
-                value={name}
-                setValue={setName}
-              />
-            </div>
-            <div>
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col" className="text-center">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {category?.map((c) => (
-                    <tr key={c._id}>
-                      <td className="text-capitalize">{c.name}</td>
-                      <td className="text-center">
-                        <button
-                          className="btn btn-outline-warning ms-2"
-                          onClick={() => {
-                            setVisible(true);
-                            setUpdatedName(c.name);
-                            setSelected(c);
-                          }}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="btn btn-outline-danger ms-2"
-                          onClick={() => {
-                            handleDelete(c._id);
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            {loading ? (
+              <Loader title="Please wait..." />
+            ) : (
+              <>
+                <div className="p-3 ">
+                  <CategoryForm
+                    handleSubmit={handleSubmit}
+                    value={name}
+                    setValue={setName}
+                  />
+                </div>
+                <div>
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col" className="text-center">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {category?.map((c) => (
+                        <tr key={c._id}>
+                          <td className="text-capitalize">{c.name}</td>
+                          <td className="text-center">
+                            <button
+                              className="btn btn-outline-warning ms-2"
+                              onClick={() => {
+                                setVisible(true);
+                                setUpdatedName(c.name);
+                                setSelected(c);
+                              }}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="btn btn-outline-danger ms-2"
+                              onClick={() => {
+                                handleDelete(c._id);
+                              }}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+
             <Modal
               onCancel={() => setVisible(false)}
               footer={null}

@@ -14,12 +14,16 @@ const AdminDashboard = () => {
           </div>
           <div className="col-md-9">
             <div className="card p-3">
-              <h3 className="text-capitalize">
-                Admin Name: {auth?.user?.name}
+              <h3 className="text-capitalize fw-light">
+                Admin Name: <span className="fw-bold"> {auth?.user?.name}</span>
               </h3>
-              <h3>Admin Email: {auth?.user?.email}</h3>
-              <h3 className="text-capitalize">
-                Admin Contact: {auth?.user?.phone}
+              <h3 className=" fw-light">
+                Admin Email:{" "}
+                <span className="fw-bold"> {auth?.user?.email}</span>
+              </h3>
+              <h3 className="text-capitalize fw-light">
+                Admin Contact:{" "}
+                <span className="fw-bold"> {auth?.user?.phone}</span>
               </h3>
             </div>
           </div>

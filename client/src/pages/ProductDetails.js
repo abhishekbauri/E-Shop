@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../context/cart.js";
 import toast from "react-hot-toast";
+import Loader from "../components/loader/Loader.js";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -12,14 +13,17 @@ const ProductDetails = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [cart, setCart] = useCart();
   const [loading, setLoading] = useState(true);
+  const [loader, setLoader] = useState(true);
 
   // get similar product
   const getSimilarProduct = async (pid, cid) => {
     try {
+      setLoader(true);
       const { data } = await axios.get(
         `/api/v1/product/similar-product/${pid}/${cid}`,
       );
       setRelatedProducts(data?.products);
+      setLoader(false);
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +52,7 @@ const ProductDetails = () => {
   return (
     <Layout>
       {loading ? (
-        <h1 className="text-center">Loading...</h1>
+        <Loader />
       ) : (
         <div className="row container-fluid mt-3">
           <div className="col-md-6 text-center d-flex justify-content-center align-items-center">
@@ -100,52 +104,63 @@ const ProductDetails = () => {
         <h5 className="text-center text-uppercase fs-2 fst-italic">
           Similar Products
         </h5>
-        {relatedProducts.length < 1 && (
-          <p className="text-center text-uppercase">
-            No similar products found
-          </p>
-        )}
-        <div className="d-flex justify-content-around pb-4 flex-wrap">
-          {relatedProducts?.map((p) => (
-            <div className="card mt-3" style={{ width: "18rem" }} key={p._id}>
-              <img
-                src={`/api/v1/product/product-photo/${p._id}`}
-                className="card-img-top"
-                alt={p.name}
-              />
-              <div className="card-body">
-                <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
-                  <h5 className="card-title text-capitalize fw-light m-0">
-                    {p.name}
-                  </h5>
-                  <p className="card-text fw-bold fs-6 m-0">₹ {p.price}</p>
-                </div>
 
-                <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
-                  <button
-                    className="btn btn-outline-info text-capitalize"
-                    onClick={() => navigate(`/product/${p.slug}`)}
-                  >
-                    More Details
-                  </button>
-                  <button
-                    className="btn btn-outline-primary text-uppercase "
-                    onClick={() => {
-                      setCart([...cart, p]);
-                      localStorage.setItem(
-                        "cart",
-                        JSON.stringify([...cart, p]),
-                      );
-                      toast.success("Items added to cart");
-                    }}
-                  >
-                    Add To Cart
-                  </button>
+        {loader ? (
+          <Loader />
+        ) : (
+          <>
+            {relatedProducts.length < 1 && (
+              <p className="text-center text-uppercase">
+                No similar products found
+              </p>
+            )}
+            <div className="d-flex justify-content-around pb-4 flex-wrap">
+              {relatedProducts?.map((p) => (
+                <div
+                  className="card mt-3"
+                  style={{ width: "18rem" }}
+                  key={p._id}
+                >
+                  <img
+                    src={`/api/v1/product/product-photo/${p._id}`}
+                    className="card-img-top"
+                    alt={p.name}
+                  />
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
+                      <h5 className="card-title text-capitalize fw-light m-0">
+                        {p.name}
+                      </h5>
+                      <p className="card-text fw-bold fs-6 m-0">₹ {p.price}</p>
+                    </div>
+
+                    <div className="d-flex justify-content-between align-items-center pt-2 pb-2">
+                      <button
+                        className="btn btn-outline-info text-capitalize"
+                        onClick={() => navigate(`/product/${p.slug}`)}
+                      >
+                        More Details
+                      </button>
+                      <button
+                        className="btn btn-outline-primary text-uppercase "
+                        onClick={() => {
+                          setCart([...cart, p]);
+                          localStorage.setItem(
+                            "cart",
+                            JSON.stringify([...cart, p]),
+                          );
+                          toast.success("Items added to cart");
+                        }}
+                      >
+                        Add To Cart
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
     </Layout>
   );

@@ -18,7 +18,7 @@ const app = express();
 
 // middleware
 const corsOptions = {
-  origin: "https://your-vercel-frontend.vercel.app",
+  origin: "*",
 };
 
 app.use(cors(corsOptions));

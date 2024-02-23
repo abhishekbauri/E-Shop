@@ -23,7 +23,9 @@ const HomePage = () => {
   // Get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await axios.get(
+        "https://e-shop-backend-akb.vercel.app/api/v1/category/categories",
+      );
       if (data?.status === "success") {
         setCategories(data?.category);
       }

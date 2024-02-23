@@ -47,17 +47,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// Route to set a cookie with appropriate attributes
-app.get("/set-cookie", (req, res) => {
-  res
-    .cookie("myCookie", "cookieValue", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    })
-    .send("Cookie set successfully");
-});
-
 // PORT
 const PORT = process.env.PORT;
 

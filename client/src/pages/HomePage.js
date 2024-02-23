@@ -28,6 +28,7 @@ const HomePage = () => {
         setCategories(data?.category);
       }
     } catch (error) {
+      console.log("getAllCategoryErr-->", error);
       toast.error(error.message || "Can not fetch category!");
     }
   };
@@ -42,6 +43,7 @@ const HomePage = () => {
     } catch (error) {
       setLoader(false);
       toast.error("Error occured while loading product list!");
+      console.log("getAllProductsErr-->", error);
     }
   };
 

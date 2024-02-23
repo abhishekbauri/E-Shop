@@ -18,7 +18,7 @@ const app = express();
 
 // middleware
 const corsOptions = {
-  origin: "*",
+  origin: "https://e-shop-by-akb.vercel.app/",
 };
 
 app.use(cors(corsOptions));

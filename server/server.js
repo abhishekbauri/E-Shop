@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 
 // configure env
@@ -19,10 +20,11 @@ const app = express();
 // middleware
 const corsOptions = {
   origin: "https://e-shop-by-akb.vercel.app",
-  credentials: true 
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
+app.use(cookieParser());
 
 // for development
 // app.use(cors());

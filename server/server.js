@@ -20,6 +20,20 @@ app.use(cors());
 
 app.use(express.json());
 
+//  log requests to the console
+app.use((req, res, next) => {
+  res.set("Access-Control-Allow-Credentials", "true");
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, PUT");
+  res.set("Access-Control-Allow-Headers", "*");
+
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+  } else {
+    next();
+  }
+});
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }

@@ -37,7 +37,7 @@ const HomePage = () => {
   const getAllProducts = async () => {
     try {
       setLoader(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(`api/v1/product/product-list/${page}`);
       setLoader(false);
       setProducts(data.products);
     } catch (error) {

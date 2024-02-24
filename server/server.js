@@ -16,12 +16,6 @@ connectDB();
 
 const app = express();
 
-// middleware
-// const corsOptions = {
-//   origin: "https://e-shop-by-akb.vercel.app",
-//   credentials: true,
-// };
-
 app.use(cors());
 
 app.use(express.json());

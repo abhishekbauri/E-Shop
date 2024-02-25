@@ -18,32 +18,25 @@ const Register = () => {
   // form function
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // toast.success("Register successfully");
 
     try {
-      // // Method 1 (using env variable)
-      // const res = await axios.post(
-      //   `${process.env.REACT_APP_API}/api/v1/auth/register`,
-      //   { name, email, password, phone, address },
-      // );
-
-      // Method 2 (using proxy)
-      const res = await axios.post("/api/v1/auth/register", {
-        name,
-        email,
-        password,
-        phone,
-        address,
-        answer,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASEURL}/api/v1/auth/register`,
+        {
+          name,
+          email,
+          password,
+          phone,
+          address,
+          answer,
+        },
+      );
 
       if (res && res.data.status === "success") {
-        toast.success(res.data.message);
-
-        alert("Registered!!");
+        toast.success(res.data.message || "User created successfully!");
         navigate("/login");
       } else if (res.data.status === "fail") {
-        toast.error(res.data.message);
+        toast.error(res.data.message || "Something went wrong!");
       }
     } catch (error) {
       toast.error("Something went wrong");
@@ -92,12 +85,12 @@ const Register = () => {
 
           <div className="mb-3">
             <input
-              type="text"
+              type="number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="form-control"
               id="exampleInputPhone"
-              placeholder=" Enter your  number"
+              placeholder=" Enter your number"
               required
             />
           </div>

@@ -15,17 +15,20 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/api/v1/auth/forgot-password", {
-        email,
-        newPassword,
-        answer,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASEURL}/api/v1/auth/forgot-password`,
+        {
+          email,
+          newPassword,
+          answer,
+        },
+      );
 
       if (res && res.data.status === "success") {
-        toast.success(res.data.message);
+        toast.success(res.data.message || "Password reset successful");
         navigate("/login");
       } else if (res.data.status === "fail") {
-        toast.error(res.data.message);
+        toast.error(res.data.message || "Failed to reset password");
       }
     } catch (error) {
       toast.error("Something went wrong");

@@ -18,11 +18,11 @@ const AdminDashboard = () => {
                 Admin Name: <span className="fw-bold"> {auth?.user?.name}</span>
               </h3>
               <h3 className=" fw-light">
-                Admin Email:{" "}
+                Admin Email:
                 <span className="fw-bold"> {auth?.user?.email}</span>
               </h3>
               <h3 className="text-capitalize fw-light">
-                Admin Contact:{" "}
+                Admin Contact:
                 <span className="fw-bold"> {auth?.user?.phone}</span>
               </h3>
             </div>

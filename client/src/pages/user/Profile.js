@@ -18,7 +18,7 @@ const Profile = () => {
 
     try {
       const { data } = await axios.put(
-        "/api/v1/auth/profile",
+        `${process.env.REACT_APP_BASEURL}/api/v1/auth/profile`,
         {
           name,
           email,
@@ -34,7 +34,7 @@ const Profile = () => {
       );
 
       if (data?.error) {
-        toast.error(data?.error);
+        toast.error(data?.error || "An error occurred!");
       } else {
         setAuth({ ...auth, user: data?.updateUser });
         let ls = localStorage.getItem("auth");
@@ -103,12 +103,12 @@ const Profile = () => {
 
                 <div className="mb-3">
                   <input
-                    type="text"
+                    type="number"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="form-control"
                     id="exampleInputPhone"
-                    placeholder=" Enter your  number"
+                    placeholder=" Enter your number"
                   />
                 </div>
 

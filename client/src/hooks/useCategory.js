@@ -9,7 +9,9 @@ export default function useCategory() {
   // get category
   const getCategories = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/category/categories`,
+      );
       setCategories(data?.category);
     } catch (error) {
       toast.error("Error: Cannot fetch categories!");

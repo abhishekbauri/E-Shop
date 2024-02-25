@@ -29,7 +29,7 @@ const CreateCategory = () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        "/api/v1/category/create-category",
+        `${process.env.REACT_APP_BASEURL}/api/v1/category/create-category`,
         {
           name,
         },
@@ -57,7 +57,9 @@ const CreateCategory = () => {
   // Get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/category/categories`,
+      );
       if (data?.status === "success") {
         setCategory(data?.category);
       }
@@ -76,7 +78,7 @@ const CreateCategory = () => {
 
     try {
       const { data } = await axios.put(
-        `/api/v1/category/update-category/${selected._id}`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/category/update-category/${selected._id}`,
         { name: updatedName },
         {
           headers: {
@@ -101,7 +103,7 @@ const CreateCategory = () => {
   const handleDelete = async (pid) => {
     try {
       const { data } = await axios.delete(
-        `/api/v1/category/delete-category/${pid}`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/category/delete-category/${pid}`,
         {
           headers: {
             Authorization: token,

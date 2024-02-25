@@ -15,11 +15,14 @@ const Orders = () => {
   const getOrders = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("/api/v1/auth/orders", {
-        headers: {
-          Authorization: auth?.token,
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/auth/orders`,
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
         },
-      });
+      );
       setOrders(data);
       setLoading(false);
     } catch (error) {
@@ -84,7 +87,7 @@ const Orders = () => {
                           >
                             <div className="col-md-4">
                               <img
-                                src={`/api/v1/product/product-photo/${p._id}`}
+                                src={`${process.env.REACT_APP_BASEURL}/api/v1/product/product-photo/${p._id}`}
                                 alt={p.name}
                                 width="100px"
                                 height={"100px"}

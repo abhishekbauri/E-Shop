@@ -18,15 +18,16 @@ const Login = () => {
     // toast.success("Register successfully");
 
     try {
-      // Method 2 (using proxy)
-      const res = await axios.post("/api/v1/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASEURL}/api/v1/auth/login`,
+        {
+          email,
+          password,
+        },
+      );
 
       if (res && res.data.status === "success") {
-        toast.success(res.data.message);
-        // alert(res.data.message);
+        toast.success(res.data.message || "Login Successfully!");
 
         // setting authentication details using context api
         setAuth({
@@ -41,7 +42,7 @@ const Login = () => {
         // directly checkout to the url after login or if no url than home page
         navigate(location.state || "/");
       } else if (res.data.status === "fail") {
-        toast.error(res.data.message);
+        toast.error(res.data.message || "Invalid Credentials!");
       }
     } catch (error) {
       toast.error("Something went wrong");

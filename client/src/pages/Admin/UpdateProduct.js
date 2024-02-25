@@ -31,7 +31,7 @@ const UpdateProduct = () => {
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/get-product/${params.slug}`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/get-product/${params.slug}`,
       );
       setName(data.products.name);
       setId(data.products._id);
@@ -53,7 +53,9 @@ const UpdateProduct = () => {
   // Get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/category/categories`,
+      );
       if (data?.status === "success") {
         setCategories(data?.category);
       }
@@ -79,7 +81,7 @@ const UpdateProduct = () => {
       productData.append("category", category);
 
       const { data } = await axios.put(
-        `/api/v1/product/update-product/${id}`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/update-product/${id}`,
         productData,
         {
           headers: {
@@ -110,11 +112,14 @@ const UpdateProduct = () => {
         throw new Error("User Don't want to delete this product!");
       }
 
-      await axios.delete(`/api/v1/product/delete-product/${id}`, {
-        headers: {
-          Authorization: token,
+      await axios.delete(
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/delete-product/${id}`,
+        {
+          headers: {
+            Authorization: token,
+          },
         },
-      });
+      );
 
       navigate("/dashboard/admin/products");
       toast.success("Products deleted successfully");
@@ -132,7 +137,6 @@ const UpdateProduct = () => {
           </div>
           <div className="col-md-9">
             <h1 className="text-center text-capitalize text-bg-dark text-light pt-2 pb-2">
-              {" "}
               update products
             </h1>
             <div className="m-1 w-75">
@@ -181,7 +185,7 @@ const UpdateProduct = () => {
                 ) : (
                   <div className="text-center">
                     <img
-                      src={`/api/v1/product/product-photo/${id}`}
+                      src={`${process.env.REACT_APP_BASEURL}/api/v1/product/product-photo/${id}`}
                       alt="product_photo"
                       height={"200px"}
                       className="img img-responsive"

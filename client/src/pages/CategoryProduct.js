@@ -18,7 +18,7 @@ const CategoryProduct = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `/api/v1/product/product-category/${params.slug}`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/product-category/${params.slug}`,
       );
       setProducts(data?.products);
       setCategory(data?.category);
@@ -52,7 +52,7 @@ const CategoryProduct = () => {
                     key={p._id}
                   >
                     <img
-                      src={`/api/v1/product/product-photo/${p._id}`}
+                      src={`${process.env.REACT_APP_BASEURL}/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                     />

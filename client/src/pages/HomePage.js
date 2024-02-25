@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import axios from "axios";
@@ -47,7 +48,6 @@ const HomePage = () => {
     } catch (error) {
       setLoader(false);
       toast.error("Error occured while loading product list!");
-      console.log("getAllProductsErr-->", error);
     }
   };
 
@@ -75,6 +75,7 @@ const HomePage = () => {
       setLoader(false);
       setProducts(data.products);
     } catch (error) {
+      setLoader(false);
       toast.error(error.message || "Something went wrong");
     }
   };
@@ -108,7 +109,6 @@ const HomePage = () => {
 
   useEffect(() => {
     if (page > 1) loadMore();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   useEffect(() => {
@@ -118,33 +118,35 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!checked.length && !radio.length) getAllProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked.length, radio.length]);
 
   useEffect(() => {
     if (checked.length || radio.length) filterProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked, radio]);
 
   return (
     <Layout title={"All Products - Best offers"}>
       <div className="container-fluid mt-3 p3">
         <div className="row">
-          <div className="col-md-2 mb-3 shadow border-end">
-            <h4 className="text-center mt-2 text-uppercase fs-5">
-              Filter By Category
-            </h4>
-            <div className="d-flex flex-column">
-              {categories?.map((c) => (
-                <Checkbox
-                  key={c._id}
-                  onChange={(e) => handleFilter(e.target.checked, c._id)}
-                  className="text-uppercase"
-                >
-                  {c.name}
-                </Checkbox>
-              ))}
-            </div>
+          <div className="col-md-2 mb-3 mt-0 mt-lg-4 shadow border-end h-100">
+            {categories.length > 0 && (
+              <>
+                <h4 className="text-center mt-2 text-uppercase fs-5">
+                  Filter By Category
+                </h4>
+                <div className="d-flex flex-column">
+                  {categories?.map((c) => (
+                    <Checkbox
+                      key={c._id}
+                      onChange={(e) => handleFilter(e.target.checked, c._id)}
+                      className="text-uppercase"
+                    >
+                      {c.name}
+                    </Checkbox>
+                  ))}
+                </div>
+              </>
+            )}
 
             <h4 className="text-center mt-4 text-uppercase fs-5">
               Filter By Price

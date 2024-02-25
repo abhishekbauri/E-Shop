@@ -20,7 +20,7 @@ const ProductDetails = () => {
     try {
       setLoader(true);
       const { data } = await axios.get(
-        `/api/v1/product/similar-product/${pid}/${cid}`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/similar-product/${pid}/${cid}`,
       );
       setRelatedProducts(data?.products);
       setLoader(false);
@@ -34,7 +34,7 @@ const ProductDetails = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `/api/v1/product/get-product/${params.slug}`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/get-product/${params.slug}`,
       );
       setProduct(data?.products);
       getSimilarProduct(data?.products._id, data?.products?.category._id);
@@ -57,7 +57,7 @@ const ProductDetails = () => {
         <div className="row container-fluid mt-3">
           <div className="col-md-6 text-center d-flex justify-content-center align-items-center">
             <img
-              src={`/api/v1/product/product-photo/${product._id}`}
+              src={`${process.env.REACT_APP_BASEURL}/api/v1/product/product-photo/${product._id}`}
               alt={product.name}
               height="300"
               width={"300px"}
@@ -122,7 +122,7 @@ const ProductDetails = () => {
                   key={p._id}
                 >
                   <img
-                    src={`/api/v1/product/product-photo/${p._id}`}
+                    src={`${process.env.REACT_APP_BASEURL}/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
                     alt={p.name}
                   />

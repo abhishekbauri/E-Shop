@@ -26,11 +26,14 @@ const AdminOrder = () => {
   const getOrders = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("/api/v1/auth/all-orders", {
-        headers: {
-          Authorization: auth?.token,
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/auth/all-orders`,
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
         },
-      });
+      );
       setOrders(data);
       setLoading(false);
     } catch (error) {
@@ -46,7 +49,7 @@ const AdminOrder = () => {
   const handleChange = async (orderId, value) => {
     try {
       const { data } = await axios.put(
-        `/api/v1/auth/order-status/${orderId}`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/auth/order-status/${orderId}`,
         {
           status: value,
         },
@@ -128,7 +131,7 @@ const AdminOrder = () => {
                           >
                             <div className="col-md-4">
                               <img
-                                src={`/api/v1/product/product-photo/${p._id}`}
+                                src={`${process.env.REACT_APP_BASEURL}/api/v1/product/product-photo/${p._id}`}
                                 alt={p.name}
                                 width="100px"
                                 height={"80px"}

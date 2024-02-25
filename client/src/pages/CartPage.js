@@ -42,7 +42,9 @@ const CartPage = () => {
   // get payment gateway token
   const getToken = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/braintree/token");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/braintree/token`,
+      );
       setClientToken(data?.clientToken);
     } catch (error) {
       toast.error(
@@ -61,7 +63,7 @@ const CartPage = () => {
       const { nonce } = await instance.requestPaymentMethod();
       // eslint-disable-next-line no-unused-vars
       const { data } = await axios.post(
-        "/api/v1/product/braintree/payment",
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/braintree/payment`,
         {
           nonce,
           cart,
@@ -107,7 +109,7 @@ const CartPage = () => {
               <div className="row mb-2 card flex-row p-3" key={p._id}>
                 <div className="col-md-4 ">
                   <img
-                    src={`/api/v1/product/product-photo/${p._id}`}
+                    src={`${process.env.REACT_APP_BASEURL}/api/v1/product/product-photo/${p._id}`}
                     alt={p.name}
                     width="150px"
                     height={`150px`}

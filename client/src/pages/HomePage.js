@@ -23,7 +23,9 @@ const HomePage = () => {
   // Get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/category/categories`,
+      );
       if (data?.status === "success") {
         setCategories(data?.category);
       }
@@ -37,7 +39,9 @@ const HomePage = () => {
   const getAllProducts = async () => {
     try {
       setLoader(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/product-list/${page}`,
+      );
       setLoader(false);
       setProducts(data.products);
     } catch (error) {
@@ -61,10 +65,13 @@ const HomePage = () => {
   const filterProduct = async () => {
     try {
       setLoader(true);
-      const { data } = await axios.post(`/api/v1/product/product-filters`, {
-        checked,
-        radio,
-      });
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/product-filters`,
+        {
+          checked,
+          radio,
+        },
+      );
       setLoader(false);
       setProducts(data.products);
     } catch (error) {
@@ -75,7 +82,9 @@ const HomePage = () => {
   // getTotal count of products
   const getTotal = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/product-count");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/product-count`,
+      );
       setTotal(data?.total);
     } catch (error) {
       toast.error(error.message || "Something went wrong");
@@ -86,7 +95,9 @@ const HomePage = () => {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/v1/product/product-list/${page}`,
+      );
       setLoading(false);
       setProducts([...products, ...data?.products]);
     } catch (error) {
@@ -174,7 +185,7 @@ const HomePage = () => {
                     key={p._id}
                   >
                     <img
-                      src={`/api/v1/product/product-photo/${p._id}`}
+                      src={`${process.env.REACT_APP_BASEURL}/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                     />

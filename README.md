@@ -32,7 +32,7 @@ This is a full-stack E-Commerce project built using the MERN (MongoDB, Express.j
 - `client`: React.js frontend code
 - `server`: Node.js/Express.js backend code
 
-## Setup
+## Setup For Complete Project (Frontend + Backend)
 
 1. **Clone the repository**
 2. **Install dependencies for Frontend**
@@ -42,17 +42,33 @@ This is a full-stack E-Commerce project built using the MERN (MongoDB, Express.j
    - cd `server`
    - `npm i`
 
-4. **Set up environment variables:**
+4. **Set up environment variables: Backend**
 
    Create a `.env` file in the server directory and add set your own environment variables as shown in the `sample.env` file. For setting environment for payment use braintree[https://www.braintreepayments.com/sandbox]
 
-5. **Change proxy**
+5. **Set up environment variables: Frontend**
 
-   In `client/package.json` file add `"proxy"` value as `"http://localhost:8000"` i.e url of your server or backend
+   Create a `.env` file in the client directory and add `REACT_APP_BASEURL=http://localhost:8000` i.e url of your server or backend
 
 6. **To run locally**
    - cd client and run `npm start` (for frontend)
    - cd server and run `npm run start:dev` (for backend)
+
+
+## Setup For Frontend Part Only
+
+1. **Clone the repository**
+   - Only client directory is required. You can remove the server directory
+
+3. **Install dependencies for Frontend**
+   - cd `client`
+   - `npm i`
+
+6. **Set up environment variables: Frontend**
+
+   Create a `.env` file in the client directory and add `REACT_APP_BASEURL=https://e-shop-backend-akb.vercel.app` i.e url of my backend api
+7. **To run locally**
+   - cd client and run `npm start` 
 
 
 

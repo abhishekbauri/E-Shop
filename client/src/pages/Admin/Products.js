@@ -38,7 +38,7 @@ const Products = () => {
             <h1 className="text-center text-capitalize text-bg-dark text-light pt-2 pb-2">
               all product list
             </h1>
-            <div className="d-flex justify-content-around flex-wrap">
+            <div className="d-flex justify-content-around gap-1 flex-wrap">
               {loading ? (
                 <Loader />
               ) : (

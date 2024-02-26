@@ -127,7 +127,7 @@ const HomePage = () => {
     <Layout title={"All Products - Best offers"}>
       <div className="container-fluid mt-3 p3">
         <div className="row">
-          <div className="col-md-2 mb-3 mt-0 mt-lg-4 shadow border-end h-100">
+          <div className="col-md-3 col-lg-2 mb-3 mt-0 mt-md-4 shadow border-end h-100">
             {categories.length > 0 && (
               <>
                 <h4 className="text-center mt-2 text-uppercase fs-5">
@@ -171,7 +171,7 @@ const HomePage = () => {
               </button>
             </div>
           </div>
-          <div className="col-md-10">
+          <div className="col-md-9 col-lg-10">
             <h1 className="text-center text-uppercase fst-italic">
               All Products
             </h1>
@@ -181,7 +181,7 @@ const HomePage = () => {
               <div className="d-flex justify-content-around flex-wrap">
                 {products?.map((p) => (
                   <div
-                    className="card mt-3"
+                    className="card mt-3 "
                     style={{ width: "18rem" }}
                     key={p._id}
                   >

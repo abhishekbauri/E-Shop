@@ -5,13 +5,13 @@
   justify-content: center;
   min-height: 75vh;
   flex-direction: column;
-  background: rgb(60, 247, 239);
+  /* background: rgb(60, 247, 239);
   background: linear-gradient(
     90deg,
     rgba(60, 247, 239, 1) 0%,
     rgba(37, 66, 228, 1) 35%,
     rgba(0, 202, 255, 1) 100%
-  );
+  ); */
 }
 
 .form-container form {
@@ -20,6 +20,7 @@
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
   border-radius: 10px;
+  border: 1px solid black;
 }
 
 .form-container form .title {

@@ -90,7 +90,7 @@ const CartPage = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
-            <h1 className="text-center bg-light p-2 mb-1 text-capitalize fst-italic">
+            <h1 className="text-center p-2 mb-1 text-capitalize fst-italic">
               {`Hello ${auth?.token && auth?.user?.name}`}
             </h1>
             <h4 className="text-center">

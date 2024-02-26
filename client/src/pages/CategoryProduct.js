@@ -44,7 +44,7 @@ const CategoryProduct = () => {
             </h1>
 
             <div className="row">
-              <div className="d-flex justify-content-around flex-wrap">
+              <div className="d-flex justify-content-around flex-wrap pb-3">
                 {products?.map((p) => (
                   <div
                     className="card mt-3"

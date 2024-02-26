@@ -12,7 +12,7 @@ This is a full-stack E-Commerce project built using the MERN (MongoDB, Express.j
 - Related products available when checking for more details of a particular product
 - Shopping cart: Manage items in the cart and remove items
 - Filter product on basis of category and price range
-- Integrated Pyament Gateway (braintree)
+- Integrated Payment Gateway (Braintree)
 
 ## Technologies Used
 
@@ -39,6 +39,7 @@ This is a full-stack E-Commerce project built using the MERN (MongoDB, Express.j
    - cd `client`
    - `npm i`
 3. **Install dependencies for Backend**
+
    - cd `server`
    - `npm i`
 
@@ -54,21 +55,20 @@ This is a full-stack E-Commerce project built using the MERN (MongoDB, Express.j
    - cd client and run `npm start` (for frontend)
    - cd server and run `npm run start:dev` (for backend)
 
-
 ## Setup For Frontend Part Only
 
 1. **Clone the repository**
+
    - Only client directory is required. You can remove the server directory
 
-3. **Install dependencies for Frontend**
+2. **Install dependencies for Frontend**
+
    - cd `client`
    - `npm i`
 
-6. **Set up environment variables: Frontend**
+3. **Set up environment variables: Frontend**
 
    Create a `.env` file in the client directory and add `REACT_APP_BASEURL=https://e-shop-backend-akb.vercel.app` i.e url of my backend api
-7. **To run locally**
-   - cd client and run `npm start` 
 
-
-
+4. **To run locally**
+   - cd client and run `npm start`
